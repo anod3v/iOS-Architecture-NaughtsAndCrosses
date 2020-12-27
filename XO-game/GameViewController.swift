@@ -21,6 +21,7 @@ class GameViewController: UIViewController {
     private lazy var referee = Referee(gameboard: gameBoard)
     
     var isComputerModeOn = true
+    var currentPlayer: Player = .first
     
     private var currentState: GameState! {
         didSet {
@@ -40,17 +41,27 @@ class GameViewController: UIViewController {
             self.currentState.addSign(at: position)
             self.counter += 1
             
+            self.switchCurrentPlayer()
+            
             if self.currentState.isMoveCompleted {
                 self.nextPlayerTurn()
             }
         }
     }
     
+    private func switchCurrentPlayer() {
+        if currentPlayer == .first {
+            currentPlayer = .second
+        } else {
+            currentPlayer = .first
+        }
+    }
+    
     private func firstPlayerTurn() {
-        let firstPlayer: Player = .first
-        currentState = PlayerGameState(player: firstPlayer, gameViewContoller: self,
+        //        let firstPlayer: Player = .first
+        currentState = PlayerGameState(player: currentPlayer, gameViewContoller: self,
                                        gameBoard: gameBoard,
-                                       gameBoardView: gameboardView, markViewPrototype: firstPlayer.markViewPrototype)
+                                       gameBoardView: gameboardView, markViewPrototype: currentPlayer.markViewPrototype)
     }
     
     private func nextPlayerTurn() {
@@ -65,20 +76,19 @@ class GameViewController: UIViewController {
             currentState = GameEndState(winnerPlayer: nil, gameViewController: self)
         }
         
-        if counter % 2 == 0 {
-            let player: Player = .first
-            currentState = PlayerGameState(player: player,
-                                               gameViewContoller: self,
-                                               gameBoard: gameBoard, gameBoardView: gameboardView,
-                                               markViewPrototype: player.markViewPrototype)
-            
-        } else {
-            let player: Player = .second
-            currentState = ComputerPlayerGameState(player: player,
-                                                       gameViewContoller: self,
-                                                       gameBoard: gameBoard, gameBoardView: gameboardView,
-                                                       markViewPrototype: player.markViewPrototype)
-            
+        switch currentPlayer {
+        case .first:
+            currentState = PlayerGameState(player: currentPlayer,
+                                           gameViewContoller: self,
+                                           gameBoard: gameBoard, gameBoardView: gameboardView,
+                                           markViewPrototype: currentPlayer.markViewPrototype)
+//            currentPlayer = .second
+        case .second:
+            currentState = ComputerPlayerGameState(player: currentPlayer,
+                                                   gameViewContoller: self,
+                                                   gameBoard: gameBoard, gameBoardView: gameboardView,
+                                                   markViewPrototype: currentPlayer.markViewPrototype)
+//            currentPlayer = .first
         }
     }
     

@@ -67,8 +67,8 @@ class ComputerPlayerGameState: GameState {
         
         func begin() {
             let position = getRandomPosition()!
-            guard let gameBoardView = gameBoardView, gameBoardView.canPlaceMarkView(at: position) else { return }
-            gameBoardView.placeMarkView(markViewPrototype.copy(), at: position)
+            gameBoardView?.onSelectPosition!(position)
+            gameBoardView?.placeMarkView(markViewPrototype.copy(), at: position)
             isMoveCompleted = true
             
             
