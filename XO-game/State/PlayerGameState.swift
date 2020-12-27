@@ -43,6 +43,8 @@ class PlayerGameState: GameState {
         
         Logger.shared.log(action: .playerSetSign(player: player, position: position))
         gameBoard?.setPlayer(player, at: position)
+        
+        
         gameBoardView.placeMarkView(markViewPrototype.copy(), at: position)
         isMoveCompleted = true
     }

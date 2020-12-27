@@ -9,7 +9,7 @@
 import UIKit
 
 class GameViewController: UIViewController {
-
+    
     @IBOutlet var gameboardView: GameboardView!
     @IBOutlet var firstPlayerTurnLabel: UILabel!
     @IBOutlet var secondPlayerTurnLabel: UILabel!
@@ -19,6 +19,8 @@ class GameViewController: UIViewController {
     private var counter: Int = 0
     private let gameBoard = Gameboard()
     private lazy var referee = Referee(gameboard: gameBoard)
+    
+    var isComputerModeOn = true
     
     private var currentState: GameState! {
         didSet {
@@ -63,24 +65,36 @@ class GameViewController: UIViewController {
             currentState = GameEndState(winnerPlayer: nil, gameViewController: self)
         }
         
-        if let playerState = currentState as? PlayerGameState {
-            let nextPlayer = playerState.player.next
-            currentState = PlayerGameState(player: nextPlayer,
-                                           gameViewContoller: self,
-                                           gameBoard: gameBoard, gameBoardView: gameboardView,
-                                           markViewPrototype: nextPlayer.markViewPrototype)
+        if !isComputerModeOn {
+            
+            if let playerState = currentState as? PlayerGameState {
+                let nextPlayer = playerState.player.next
+                currentState = PlayerGameState(player: nextPlayer,
+                                               gameViewContoller: self,
+                                               gameBoard: gameBoard, gameBoardView: gameboardView,
+                                               markViewPrototype: nextPlayer.markViewPrototype)
+            }
+        } else {
+            
+            if let playerState = currentState as? ComputerPlayerGameState {
+                let nextPlayer = playerState.player.next
+                currentState = ComputerPlayerGameState(player: nextPlayer,
+                                               gameViewContoller: self,
+                                               gameBoard: gameBoard, gameBoardView: gameboardView,
+                                               markViewPrototype: nextPlayer.markViewPrototype)
+            }
         }
-    }
-    
-    @IBAction func restartButtonTapped(_ sender: UIButton) {
-        Logger.shared.log(action: .restartGame)
+        }
         
-        gameboardView.clear()
-        gameBoard.clear()
-        counter = 0
+        @IBAction func restartButtonTapped(_ sender: UIButton) {
+            Logger.shared.log(action: .restartGame)
+            
+            gameboardView.clear()
+            gameBoard.clear()
+            counter = 0
+            
+            firstPlayerTurn()
+        }
         
-        firstPlayerTurn()
-    }
-    
 }
 

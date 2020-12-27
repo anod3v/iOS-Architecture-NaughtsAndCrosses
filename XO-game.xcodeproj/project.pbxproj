@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55A495E02598D0F7004E7250 /* ComputerPlayerGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A495DF2598D0F7004E7250 /* ComputerPlayerGameState.swift */; };
 		BA43EEF725950372000923EC /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EEF625950372000923EC /* GameState.swift */; };
 		BA43EEFB259503EB000923EC /* PlayerGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EEFA259503EB000923EC /* PlayerGameState.swift */; };
 		BA43EEFE25950821000923EC /* GameEndState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EEFD25950821000923EC /* GameEndState.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55A495DF2598D0F7004E7250 /* ComputerPlayerGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerPlayerGameState.swift; sourceTree = "<group>"; };
 		BA43EEF625950372000923EC /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		BA43EEFA259503EB000923EC /* PlayerGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerGameState.swift; sourceTree = "<group>"; };
 		BA43EEFD25950821000923EC /* GameEndState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndState.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				BA43EEF625950372000923EC /* GameState.swift */,
 				BA43EEFA259503EB000923EC /* PlayerGameState.swift */,
 				BA43EEFD25950821000923EC /* GameEndState.swift */,
+				55A495DF2598D0F7004E7250 /* ComputerPlayerGameState.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				F874E4DD2225C25D00364CAE /* GameboardPosition.swift in Sources */,
 				F874E4DF2225C76000364CAE /* MarkView.swift in Sources */,
 				F874E4F12225DFF700364CAE /* Referee.swift in Sources */,
+				55A495E02598D0F7004E7250 /* ComputerPlayerGameState.swift in Sources */,
 				F874E4F52225E2CD00364CAE /* Gameboard.swift in Sources */,
 				BA43EEFE25950821000923EC /* GameEndState.swift in Sources */,
 				F874E4712224621100364CAE /* AppDelegate.swift in Sources */,
