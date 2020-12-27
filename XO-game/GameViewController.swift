@@ -66,22 +66,18 @@ class GameViewController: UIViewController {
         }
         
         if counter % 2 == 0 {
-            
-            let playerState = currentState as! PlayerGameState
-            let nextPlayer = playerState.player.next
-            currentState = PlayerGameState(player: nextPlayer,
+            let player: Player = .first
+            currentState = PlayerGameState(player: player,
                                                gameViewContoller: self,
                                                gameBoard: gameBoard, gameBoardView: gameboardView,
-                                               markViewPrototype: nextPlayer.markViewPrototype)
+                                               markViewPrototype: player.markViewPrototype)
             
         } else {
-            
-            let playerState = currentState as! PlayerGameState
-            let nextPlayer = playerState.player.next
-            currentState = ComputerPlayerGameState(player: nextPlayer,
+            let player: Player = .second
+            currentState = ComputerPlayerGameState(player: player,
                                                        gameViewContoller: self,
                                                        gameBoard: gameBoard, gameBoardView: gameboardView,
-                                                       markViewPrototype: nextPlayer.markViewPrototype)
+                                                       markViewPrototype: player.markViewPrototype)
             
         }
     }
