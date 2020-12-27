@@ -65,7 +65,7 @@ class GameViewController: UIViewController {
             currentState = GameEndState(winnerPlayer: nil, gameViewController: self)
         }
         
-        if !isComputerModeOn {
+        if counter % 2 == 0 {
             
             if let playerState = currentState as? PlayerGameState {
                 let nextPlayer = playerState.player.next
@@ -76,25 +76,28 @@ class GameViewController: UIViewController {
             }
         } else {
             
-            if let playerState = currentState as? ComputerPlayerGameState {
-                let nextPlayer = playerState.player.next
-                currentState = ComputerPlayerGameState(player: nextPlayer,
-                                               gameViewContoller: self,
-                                               gameBoard: gameBoard, gameBoardView: gameboardView,
-                                               markViewPrototype: nextPlayer.markViewPrototype)
+            if let playerState = currentState as? PlayerGameState {
+            let nextPlayer = playerState.player.next
+            
+//            if let playerState = currentState as? ComputerPlayerGameState {
+//                let nextPlayer = playerState.player.next
+            currentState = ComputerPlayerGameState(player: nextPlayer,
+                                                       gameViewContoller: self,
+                                                       gameBoard: gameBoard, gameBoardView: gameboardView,
+                                                       markViewPrototype: nextPlayer.markViewPrototype)
             }
         }
-        }
+    }
+    
+    @IBAction func restartButtonTapped(_ sender: UIButton) {
+        Logger.shared.log(action: .restartGame)
         
-        @IBAction func restartButtonTapped(_ sender: UIButton) {
-            Logger.shared.log(action: .restartGame)
-            
-            gameboardView.clear()
-            gameBoard.clear()
-            counter = 0
-            
-            firstPlayerTurn()
-        }
+        gameboardView.clear()
+        gameBoard.clear()
+        counter = 0
         
+        firstPlayerTurn()
+    }
+    
 }
 
