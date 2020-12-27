@@ -30,23 +30,23 @@ class ComputerPlayerGameState: GameState {
         }
         
         func addSign(at position: GameboardPosition) {
-//            guard let gameBoardView = gameBoardView, gameBoardView.canPlaceMarkView(at: position) else { return }
-//
-//            let markView: MarkView
-//
-//    //        switch player {
-//    //        case .first:
-//    //            markView = XView()
-//    //        case .second:
-//    //            markView = OView()
-//    //        }
-//
-//            Logger.shared.log(action: .playerSetSign(player: player, position: position))
-//            gameBoard?.setPlayer(player, at: position)
-//
-//
-//            gameBoardView.placeMarkView(markViewPrototype.copy(), at: position)
-//            isMoveCompleted = true
+            guard let gameBoardView = gameBoardView, gameBoardView.canPlaceMarkView(at: position) else { return }
+
+            let markView: MarkView
+
+    //        switch player {
+    //        case .first:
+    //            markView = XView()
+    //        case .second:
+    //            markView = OView()
+    //        }
+
+            Logger.shared.log(action: .playerSetSign(player: player, position: position))
+            gameBoard?.setPlayer(player, at: position)
+
+
+            gameBoardView.placeMarkView(markViewPrototype.copy(), at: position)
+            isMoveCompleted = true
         }
     
     func getRandomPosition() -> GameboardPosition? {
@@ -68,8 +68,8 @@ class ComputerPlayerGameState: GameState {
         func begin() {
             let position = getRandomPosition()!
             gameBoardView?.onSelectPosition!(position)
-            gameBoardView?.placeMarkView(markViewPrototype.copy(), at: position)
-            isMoveCompleted = true
+//            gameBoardView?.placeMarkView(markViewPrototype.copy(), at: position)
+//            isMoveCompleted = true
             
             
             switch player {

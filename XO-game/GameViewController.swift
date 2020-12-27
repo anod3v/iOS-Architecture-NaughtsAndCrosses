@@ -41,19 +41,11 @@ class GameViewController: UIViewController {
             self.currentState.addSign(at: position)
             self.counter += 1
             
-            self.switchCurrentPlayer()
+            self.currentPlayer = self.currentPlayer.next
             
             if self.currentState.isMoveCompleted {
                 self.nextPlayerTurn()
             }
-        }
-    }
-    
-    private func switchCurrentPlayer() {
-        if currentPlayer == .first {
-            currentPlayer = .second
-        } else {
-            currentPlayer = .first
         }
     }
     
@@ -82,13 +74,11 @@ class GameViewController: UIViewController {
                                            gameViewContoller: self,
                                            gameBoard: gameBoard, gameBoardView: gameboardView,
                                            markViewPrototype: currentPlayer.markViewPrototype)
-//            currentPlayer = .second
         case .second:
             currentState = ComputerPlayerGameState(player: currentPlayer,
                                                    gameViewContoller: self,
                                                    gameBoard: gameBoard, gameBoardView: gameboardView,
                                                    markViewPrototype: currentPlayer.markViewPrototype)
-//            currentPlayer = .first
         }
     }
     
