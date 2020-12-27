@@ -57,7 +57,12 @@ class ComputerPlayerGameState: GameState {
                 allPositions.append(GameboardPosition(column: i, row: j))
             }
         }
-        return allPositions.randomElement()!
+        allPositions.shuffle()
+        for position in allPositions {
+            guard let gameBoardView = gameBoardView, gameBoardView.canPlaceMarkView(at: position) else { continue }
+            return position
+        }
+        return nil
     }
         
         func begin() {
