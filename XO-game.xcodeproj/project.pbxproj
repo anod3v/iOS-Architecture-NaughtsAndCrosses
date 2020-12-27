@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA43EEF725950372000923EC /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EEF625950372000923EC /* GameState.swift */; };
+		BA43EEFB259503EB000923EC /* PlayerGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EEFA259503EB000923EC /* PlayerGameState.swift */; };
+		BA43EEFE25950821000923EC /* GameEndState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EEFD25950821000923EC /* GameEndState.swift */; };
+		BA43EF02259512A5000923EC /* Prototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EF01259512A5000923EC /* Prototype.swift */; };
+		BA43EF072595173B000923EC /* LogCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EF062595173B000923EC /* LogCommand.swift */; };
+		BA43EF0C259517DD000923EC /* LogAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EF0B259517DD000923EC /* LogAction.swift */; };
+		BA43EF0F259518BA000923EC /* LogInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EF0E259518BA000923EC /* LogInvoker.swift */; };
+		BA43EF12259519A9000923EC /* LogReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EF11259519A9000923EC /* LogReceiver.swift */; };
+		BA43EF15259519E6000923EC /* LogFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EF14259519E6000923EC /* LogFunc.swift */; };
 		F874E4712224621100364CAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874E4702224621100364CAE /* AppDelegate.swift */; };
 		F874E4732224621100364CAE /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874E4722224621100364CAE /* GameViewController.swift */; };
 		F874E4762224621100364CAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F874E4742224621100364CAE /* Main.storyboard */; };
@@ -24,6 +33,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA43EEF625950372000923EC /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		BA43EEFA259503EB000923EC /* PlayerGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerGameState.swift; sourceTree = "<group>"; };
+		BA43EEFD25950821000923EC /* GameEndState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndState.swift; sourceTree = "<group>"; };
+		BA43EF01259512A5000923EC /* Prototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prototype.swift; sourceTree = "<group>"; };
+		BA43EF062595173B000923EC /* LogCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCommand.swift; sourceTree = "<group>"; };
+		BA43EF0B259517DD000923EC /* LogAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogAction.swift; sourceTree = "<group>"; };
+		BA43EF0E259518BA000923EC /* LogInvoker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInvoker.swift; sourceTree = "<group>"; };
+		BA43EF11259519A9000923EC /* LogReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogReceiver.swift; sourceTree = "<group>"; };
+		BA43EF14259519E6000923EC /* LogFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFunc.swift; sourceTree = "<group>"; };
 		F874E46D2224621100364CAE /* XO-game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "XO-game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F874E4702224621100364CAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F874E4722224621100364CAE /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +71,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA43EEF52595033C000923EC /* State */ = {
+			isa = PBXGroup;
+			children = (
+				BA43EEF625950372000923EC /* GameState.swift */,
+				BA43EEFA259503EB000923EC /* PlayerGameState.swift */,
+				BA43EEFD25950821000923EC /* GameEndState.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		BA43EF0025951298000923EC /* Prototype */ = {
+			isa = PBXGroup;
+			children = (
+				BA43EF01259512A5000923EC /* Prototype.swift */,
+			);
+			path = Prototype;
+			sourceTree = "<group>";
+		};
+		BA43EF052595171F000923EC /* Command */ = {
+			isa = PBXGroup;
+			children = (
+				BA43EF062595173B000923EC /* LogCommand.swift */,
+				BA43EF0B259517DD000923EC /* LogAction.swift */,
+				BA43EF0E259518BA000923EC /* LogInvoker.swift */,
+				BA43EF11259519A9000923EC /* LogReceiver.swift */,
+				BA43EF14259519E6000923EC /* LogFunc.swift */,
+			);
+			path = Command;
+			sourceTree = "<group>";
+		};
 		F874E4642224621100364CAE = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +120,9 @@
 		F874E46F2224621100364CAE /* XO-game */ = {
 			isa = PBXGroup;
 			children = (
+				BA43EF052595171F000923EC /* Command */,
+				BA43EF0025951298000923EC /* Prototype */,
+				BA43EEF52595033C000923EC /* State */,
 				F874E4702224621100364CAE /* AppDelegate.swift */,
 				F874E4722224621100364CAE /* GameViewController.swift */,
 				F874E4F02225DFF700364CAE /* Referee.swift */,
@@ -191,12 +242,21 @@
 				F874E4DF2225C76000364CAE /* MarkView.swift in Sources */,
 				F874E4F12225DFF700364CAE /* Referee.swift in Sources */,
 				F874E4F52225E2CD00364CAE /* Gameboard.swift in Sources */,
+				BA43EEFE25950821000923EC /* GameEndState.swift in Sources */,
 				F874E4712224621100364CAE /* AppDelegate.swift in Sources */,
+				BA43EF12259519A9000923EC /* LogReceiver.swift in Sources */,
+				BA43EF0F259518BA000923EC /* LogInvoker.swift in Sources */,
+				BA43EF072595173B000923EC /* LogCommand.swift in Sources */,
+				BA43EF15259519E6000923EC /* LogFunc.swift in Sources */,
 				F874E4E22225CABF00364CAE /* OView.swift in Sources */,
 				F874E4F32225E0B100364CAE /* GameboardSize.swift in Sources */,
 				F874E4E42225CB0700364CAE /* XView.swift in Sources */,
+				BA43EEFB259503EB000923EC /* PlayerGameState.swift in Sources */,
+				BA43EF02259512A5000923EC /* Prototype.swift in Sources */,
+				BA43EEF725950372000923EC /* GameState.swift in Sources */,
 				F874E4DB2225C1AC00364CAE /* GameboardView.swift in Sources */,
 				F874E4EF2225DE4500364CAE /* Player.swift in Sources */,
+				BA43EF0C259517DD000923EC /* LogAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
