@@ -68,9 +68,10 @@ class GameViewController: UIViewController {
             return
         }
         
-        if counter >= 9 {
+        if counter >= GameboardSize.columns  * GameboardSize.rows {
             Logger.shared.log(action: .gameFinished(winned: nil))
             currentState = GameEndState(winnerPlayer: nil, gameViewController: self)
+            return
         }
         
         switch gameMode {

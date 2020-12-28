@@ -13,7 +13,7 @@ class ComputerPlayerGameState: GameState {
         var isMoveCompleted: Bool = false
         
         public let player: Player
-        weak var gameViewContoller: GameViewController?
+        weak var gameViewController: GameViewController?
         weak var gameBoard: Gameboard?
         weak var gameBoardView: GameboardView?
         
@@ -23,7 +23,7 @@ class ComputerPlayerGameState: GameState {
              gameBoard: Gameboard, gameBoardView: GameboardView, markViewPrototype: MarkView) {
             self.player = player
             self.gameBoard = gameBoard
-            self.gameViewContoller = gameViewContoller
+            self.gameViewController = gameViewContoller
             self.gameBoardView = gameBoardView
             
             self.markViewPrototype = markViewPrototype
@@ -66,20 +66,17 @@ class ComputerPlayerGameState: GameState {
     }
         
         func begin() {
-//            gameBoardView?.placeMarkView(markViewPrototype.copy(), at: position)
-//            isMoveCompleted = true
-            
             
             switch player {
             case .first:
-                gameViewContoller?.firstPlayerTurnLabel.isHidden = false
-                gameViewContoller?.secondPlayerTurnLabel.isHidden = true
+                gameViewController?.firstPlayerTurnLabel.isHidden = false
+                gameViewController?.secondPlayerTurnLabel.isHidden = true
             case .second:
-                gameViewContoller?.firstPlayerTurnLabel.isHidden = true
-                gameViewContoller?.secondPlayerTurnLabel.isHidden = false
+                gameViewController?.firstPlayerTurnLabel.isHidden = true
+                gameViewController?.secondPlayerTurnLabel.isHidden = false
             }
             
-            gameViewContoller?.winnerLabel.isHidden = true
+            gameViewController?.winnerLabel.isHidden = true
             
             let position = getRandomPosition()!
             gameBoardView?.onSelectPosition!(position)
