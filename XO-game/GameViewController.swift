@@ -20,7 +20,7 @@ class GameViewController: UIViewController {
     private let gameBoard = Gameboard()
     private lazy var referee = Referee(gameboard: gameBoard)
     
-    var gameMode = GameMode.playerVsPlayer
+    var gameMode = GameMode.playerVsComputer
     var currentPlayer: Player = .first
     
     private var currentState: GameState! {

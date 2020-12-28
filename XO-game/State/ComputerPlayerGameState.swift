@@ -66,8 +66,6 @@ class ComputerPlayerGameState: GameState {
     }
         
         func begin() {
-            let position = getRandomPosition()!
-            gameBoardView?.onSelectPosition!(position)
 //            gameBoardView?.placeMarkView(markViewPrototype.copy(), at: position)
 //            isMoveCompleted = true
             
@@ -82,6 +80,9 @@ class ComputerPlayerGameState: GameState {
             }
             
             gameViewContoller?.winnerLabel.isHidden = true
+            
+            let position = getRandomPosition()!
+            gameBoardView?.onSelectPosition!(position)
         }
         
         
