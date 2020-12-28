@@ -20,7 +20,7 @@ class GameViewController: UIViewController {
     private let gameBoard = Gameboard()
     private lazy var referee = Referee(gameboard: gameBoard)
     
-    var gameMode = GameMode.playerVsComputer
+    var gameMode = GameMode.playerVsPlayer
     var currentPlayer: Player = .first
     
     private var currentState: GameState! {
@@ -45,8 +45,6 @@ class GameViewController: UIViewController {
             
             self.currentState.addSign(at: position)
             self.counter += 1
-            
-            self.currentPlayer = self.currentPlayer.next
             
             if self.currentState.isMoveCompleted {
                 self.nextPlayerTurn()
@@ -76,7 +74,7 @@ class GameViewController: UIViewController {
         
         switch gameMode {
         case .playerVsComputer:
-            
+            self.currentPlayer = self.currentPlayer.next
             switch currentPlayer {
             case .first:
                 currentState = PlayerGameState(player: currentPlayer,
