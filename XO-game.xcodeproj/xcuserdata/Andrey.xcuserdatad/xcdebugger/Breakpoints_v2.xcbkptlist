@@ -14,8 +14,8 @@
             filePath = "XO-game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "nextPlayerTurn()"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,9 +30,9 @@
             filePath = "XO-game/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "checkIfEnd()"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "nextPlayerTurn()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

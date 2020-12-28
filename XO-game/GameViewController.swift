@@ -23,7 +23,7 @@ class GameViewController: UIViewController {
     var gameMode = GameMode.playerVsPlayerBlind
     var currentPlayer: Player = .first
     var receiver = LogReceiver()
-    var commands: [LogCommand]()
+    var commands = [LogCommand]()
 
 
 private var currentState: GameState! {
@@ -48,8 +48,8 @@ override func viewDidLoad() {
     receiver.commandsSorted = { [weak self] result in
         guard let self = self else { return }
         self.commands = result
-        placeAllMoves(commands: commands)
         self.gameMode = .selfPlacingMode
+        self.firstPlayerTurn()
     }
     
     gameboardView.onSelectPosition = { [weak self] position in
@@ -64,15 +64,27 @@ override func viewDidLoad() {
     }
 }
     
-    private func placeAllMoves() {
-        
-    }
+//    private func placeAllMoves(commands: [LogCommand]) {
+//
+//    }
 
 private func firstPlayerTurn() {
-    currentPlayer = .first
-    currentState = PlayerGameState(player: currentPlayer, gameViewContoller: self,
-                                   gameBoard: gameBoard,
-                                   gameBoardView: gameboardView, markViewPrototype: currentPlayer.markViewPrototype)
+    switch gameMode {
+    case .selfPlacingMode:
+        if let move = commands.first?.moveData {
+        let currentPosition = move.position
+        currentState = ComputerPlaceMoveGameState(player: currentPlayer, position: currentPosition, gameViewContoller: self,
+                                           gameBoard: gameBoard,
+                                           gameBoardView: gameboardView, markViewPrototype: currentPlayer.markViewPrototype)
+        commands.removeFirst()
+        }
+        
+    default:
+        currentPlayer = .first
+        currentState = PlayerGameState(player: currentPlayer, gameViewContoller: self,
+                                       gameBoard: gameBoard,
+                                       gameBoardView: gameboardView, markViewPrototype: currentPlayer.markViewPrototype)
+    }
 }
 
 private func checkIfWin() -> Bool {
@@ -139,6 +151,15 @@ private func nextPlayerTurn() {
                                            gameViewContoller: self,
                                            gameBoard: gameBoard, gameBoardView: gameboardView,
                                            markViewPrototype: nextPlayer.markViewPrototype)
+        }
+        
+    case .selfPlacingMode:
+        if let move = commands.first?.moveData {
+        let currentPosition = move.position
+        currentState = ComputerPlaceMoveGameState(player: currentPlayer, position: currentPosition, gameViewContoller: self,
+                                           gameBoard: gameBoard,
+                                           gameBoardView: gameboardView, markViewPrototype: currentPlayer.markViewPrototype)
+        commands.removeFirst()
         }
     }
 }
