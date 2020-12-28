@@ -20,13 +20,18 @@ class GameViewController: UIViewController {
     private let gameBoard = Gameboard()
     private lazy var referee = Referee(gameboard: gameBoard)
     
-    var isComputerModeOn = true
+    var gameMode = GameMode.playerVsPlayer
     var currentPlayer: Player = .first
     
     private var currentState: GameState! {
         didSet {
             currentState.begin()
         }
+    }
+    
+    enum GameMode {
+        case playerVsPlayer
+        case playerVsComputer
     }
     
     override func viewDidLoad() {
@@ -68,17 +73,29 @@ class GameViewController: UIViewController {
             currentState = GameEndState(winnerPlayer: nil, gameViewController: self)
         }
         
-        switch currentPlayer {
-        case .first:
-            currentState = PlayerGameState(player: currentPlayer,
-                                           gameViewContoller: self,
-                                           gameBoard: gameBoard, gameBoardView: gameboardView,
-                                           markViewPrototype: currentPlayer.markViewPrototype)
-        case .second:
-            currentState = ComputerPlayerGameState(player: currentPlayer,
-                                                   gameViewContoller: self,
-                                                   gameBoard: gameBoard, gameBoardView: gameboardView,
-                                                   markViewPrototype: currentPlayer.markViewPrototype)
+        switch gameMode {
+        case .playerVsComputer:
+            
+            switch currentPlayer {
+            case .first:
+                currentState = PlayerGameState(player: currentPlayer,
+                                               gameViewContoller: self,
+                                               gameBoard: gameBoard, gameBoardView: gameboardView,
+                                               markViewPrototype: currentPlayer.markViewPrototype)
+            case .second:
+                currentState = ComputerPlayerGameState(player: currentPlayer,
+                                                       gameViewContoller: self,
+                                                       gameBoard: gameBoard, gameBoardView: gameboardView,
+                                                       markViewPrototype: currentPlayer.markViewPrototype)
+            }
+        case .playerVsPlayer:
+            if let playerState = currentState as? PlayerGameState {
+                let nextPlayer = playerState.player.next
+                currentState = PlayerGameState(player: nextPlayer,
+                                               gameViewContoller: self,
+                                               gameBoard: gameBoard, gameBoardView: gameboardView,
+                                               markViewPrototype: nextPlayer.markViewPrototype)
+            }
         }
     }
     
