@@ -20,7 +20,7 @@ class GameViewController: UIViewController {
     private let gameBoard = Gameboard()
     private lazy var referee = Referee(gameboard: gameBoard)
     
-    var gameMode = GameMode.playerVsPlayer
+    var gameMode = GameMode.playerVsComputer
     var currentPlayer: Player = .first
     
     private var currentState: GameState! {
@@ -32,6 +32,7 @@ class GameViewController: UIViewController {
     enum GameMode {
         case playerVsPlayer
         case playerVsComputer
+        case playerVsPlayerBlind
     }
     
     override func viewDidLoad() {
@@ -59,22 +60,29 @@ class GameViewController: UIViewController {
                                        gameBoardView: gameboardView, markViewPrototype: currentPlayer.markViewPrototype)
     }
     
-    private func nextPlayerTurn() {
+    private func checkIfWin() {
         if let winner = referee.determineWinner() {
             currentState = GameEndState(winnerPlayer: winner, gameViewController: self)
             Logger.shared.log(action: .gameFinished(winned: winner))
             return
         }
-        
+    }
+    
+    private func checkIfEnd() {
         if counter >= GameboardSize.columns  * GameboardSize.rows {
             Logger.shared.log(action: .gameFinished(winned: nil))
             currentState = GameEndState(winnerPlayer: nil, gameViewController: self)
             return
         }
+    }
+    
+    private func nextPlayerTurn() {
         
         switch gameMode {
         case .playerVsComputer:
-            self.currentPlayer = self.currentPlayer.next
+            checkIfWin()
+            checkIfEnd()
+            currentPlayer = currentPlayer.next
             switch currentPlayer {
             case .first:
                 currentState = PlayerGameState(player: currentPlayer,
@@ -88,6 +96,25 @@ class GameViewController: UIViewController {
                                                        markViewPrototype: currentPlayer.markViewPrototype)
             }
         case .playerVsPlayer:
+            checkIfWin()
+            checkIfEnd()
+            if let playerState = currentState as? PlayerGameState {
+                let nextPlayer = playerState.player.next
+                currentState = PlayerGameState(player: nextPlayer,
+                                               gameViewContoller: self,
+                                               gameBoard: gameBoard, gameBoardView: gameboardView,
+                                               markViewPrototype: nextPlayer.markViewPrototype)
+            }
+        case .playerVsPlayerBlind:
+            switch counter {
+            case 5:
+                gameboardView.clear()
+                currentPlayer = currentPlayer.next
+            case 9:
+                checkIfWin()
+            default:
+                return
+            }
             if let playerState = currentState as? PlayerGameState {
                 let nextPlayer = playerState.player.next
                 currentState = PlayerGameState(player: nextPlayer,
