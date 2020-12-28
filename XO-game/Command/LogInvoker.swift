@@ -40,6 +40,6 @@ class LogInvoker {
 //            commands.forEach { receiver.sendMessage(message: $0.moveData) }
 //            commands = []
         }
-        receiver.commandsSorted!(commandsSorted)
+        receiver.commandsSorted?(commandsSorted)
 }
 }
