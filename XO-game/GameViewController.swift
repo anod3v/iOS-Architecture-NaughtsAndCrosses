@@ -55,7 +55,7 @@ class GameViewController: UIViewController {
     }
     
     private func firstPlayerTurn() {
-        //        let firstPlayer: Player = .first
+        currentPlayer = .first
         currentState = PlayerGameState(player: currentPlayer, gameViewContoller: self,
                                        gameBoard: gameBoard,
                                        gameBoardView: gameboardView, markViewPrototype: currentPlayer.markViewPrototype)
