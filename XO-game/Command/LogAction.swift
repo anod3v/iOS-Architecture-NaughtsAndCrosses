@@ -10,6 +10,6 @@ import Foundation
 
 enum LogAction {
     case playerSetSign(player: Player, position: GameboardPosition)
-    case gameFinished(winned: Player?)
-    case restartGame
+//    case gameFinished(winned: Player?)
+//    case restartGame
 }

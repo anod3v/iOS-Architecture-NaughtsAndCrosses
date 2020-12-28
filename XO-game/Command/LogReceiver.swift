@@ -9,7 +9,9 @@
 import Foundation
 
 class LogReceiver {
-    func sendMessage(message: String) {
-        print(message)
-    }
+//    func sendMessage(message: String) {
+//        print(message)
+//    }
+    var commandsSorted: (([LogCommand]) -> Void)?
+    init() {}
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5523C6BA259A2053003B084B /* ComputerPlaceMoveGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5523C6B9259A2053003B084B /* ComputerPlaceMoveGameState.swift */; };
 		55A495E02598D0F7004E7250 /* ComputerPlayerGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A495DF2598D0F7004E7250 /* ComputerPlayerGameState.swift */; };
 		BA43EEF725950372000923EC /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EEF625950372000923EC /* GameState.swift */; };
 		BA43EEFB259503EB000923EC /* PlayerGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EEFA259503EB000923EC /* PlayerGameState.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5523C6B9259A2053003B084B /* ComputerPlaceMoveGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerPlaceMoveGameState.swift; sourceTree = "<group>"; };
 		55A495DF2598D0F7004E7250 /* ComputerPlayerGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerPlayerGameState.swift; sourceTree = "<group>"; };
 		BA43EEF625950372000923EC /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		BA43EEFA259503EB000923EC /* PlayerGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerGameState.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				BA43EEFA259503EB000923EC /* PlayerGameState.swift */,
 				BA43EEFD25950821000923EC /* GameEndState.swift */,
 				55A495DF2598D0F7004E7250 /* ComputerPlayerGameState.swift */,
+				5523C6B9259A2053003B084B /* ComputerPlaceMoveGameState.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				BA43EF15259519E6000923EC /* LogFunc.swift in Sources */,
 				F874E4E22225CABF00364CAE /* OView.swift in Sources */,
 				F874E4F32225E0B100364CAE /* GameboardSize.swift in Sources */,
+				5523C6BA259A2053003B084B /* ComputerPlaceMoveGameState.swift in Sources */,
 				F874E4E42225CB0700364CAE /* XView.swift in Sources */,
 				BA43EEFB259503EB000923EC /* PlayerGameState.swift in Sources */,
 				BA43EF02259512A5000923EC /* Prototype.swift in Sources */,

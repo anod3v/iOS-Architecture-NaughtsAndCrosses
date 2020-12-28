@@ -15,19 +15,24 @@ class LogCommand {
         self.action = action
     }
     
-    var logMessage: String {
+    var moveData: MoveData {
         switch action {
         case .playerSetSign(let player, let position):
-            return "\(player) placed sign at position \(position)"
-        case .gameFinished(let winner):
-            if let winner = winner {
-                return "\(winner) won game"
-            } else {
-                return "Is Draw"
-            }
-        case .restartGame:
-            return "Game was restarted"
+            return MoveData(player: player, position: position)
+//        case .gameFinished(let winner):
+//            if let winner = winner {
+//                return "\(winner) won game"
+//            } else {
+//                return "Is Draw"
+//            }
+//        case .restartGame:
+//            return "Game was restarted"
         }
     }
+}
+
+struct MoveData {
+    let player: Player
+    let position: GameboardPosition
 }
 

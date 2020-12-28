@@ -34,13 +34,6 @@ class PlayerGameState: GameState {
         
         let markView: MarkView
         
-//        switch player {
-//        case .first:
-//            markView = XView()
-//        case .second:
-//            markView = OView()
-//        }
-        
         Logger.shared.log(action: .playerSetSign(player: player, position: position))
         gameBoard?.setPlayer(player, at: position)
         

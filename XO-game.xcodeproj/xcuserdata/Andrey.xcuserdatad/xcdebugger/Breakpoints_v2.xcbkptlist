@@ -32,7 +32,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "85"
             endingLineNumber = "85"
-            landmarkName = "nextPlayerTurn()"
+            landmarkName = "checkIfEnd()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

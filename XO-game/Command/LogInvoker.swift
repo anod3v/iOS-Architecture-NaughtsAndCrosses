@@ -12,8 +12,10 @@ class LogInvoker {
     public static let shared = LogInvoker()
     
     private let receiver = LogReceiver()
-    private let bufferSize = 6
+    private let bufferSize = 10
     private var commands: [LogCommand] = []
+    private var commandsSorted: [LogCommand] = []
+    var player: Player = .first
     
     private init() {}
     
@@ -27,7 +29,17 @@ class LogInvoker {
             return
         }
         
-        commands.forEach { receiver.sendMessage(message: $0.logMessage) }
-        commands = []
-    }
+        for index in commands.indices {
+            //            let move = commands.first(where: {$0.moveData.player == player })
+            if let idx = commands.firstIndex(where: { $0.moveData.player == player }) {
+                commandsSorted.append(commands[idx])
+                commands.remove(at: idx)
+                player = player.next
+            }
+            
+//            commands.forEach { receiver.sendMessage(message: $0.moveData) }
+//            commands = []
+        }
+        receiver.commandsSorted!(commandsSorted)
+}
 }
