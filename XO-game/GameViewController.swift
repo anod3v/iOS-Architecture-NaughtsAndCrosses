@@ -45,7 +45,7 @@ override func viewDidLoad() {
     //первый делает ход
     firstPlayerTurn()
     
-    receiver.commandsSorted = { [weak self] result in
+    LogReceiver.shared.commandsSorted = { [weak self] result in
         guard let self = self else { return }
         self.commands = result
         self.gameMode = .selfPlacingMode
@@ -73,10 +73,10 @@ private func firstPlayerTurn() {
     case .selfPlacingMode:
         if let move = commands.first?.moveData {
         let currentPosition = move.position
-        currentState = ComputerPlaceMoveGameState(player: currentPlayer, position: currentPosition, gameViewContoller: self,
-                                           gameBoard: gameBoard,
-                                           gameBoardView: gameboardView, markViewPrototype: currentPlayer.markViewPrototype)
         commands.removeFirst()
+            currentState = ComputerPlaceMoveGameState(player: move.player, position: currentPosition, gameViewContoller: self,
+                                           gameBoard: gameBoard,
+                                           gameBoardView: gameboardView, markViewPrototype: move.player.markViewPrototype)
         }
         
     default:
@@ -155,11 +155,11 @@ private func nextPlayerTurn() {
         
     case .selfPlacingMode:
         if let move = commands.first?.moveData {
-        let currentPosition = move.position
-        currentState = ComputerPlaceMoveGameState(player: currentPlayer, position: currentPosition, gameViewContoller: self,
-                                           gameBoard: gameBoard,
-                                           gameBoardView: gameboardView, markViewPrototype: currentPlayer.markViewPrototype)
         commands.removeFirst()
+        let currentPosition = move.position
+        currentState = ComputerPlaceMoveGameState(player: move.player, position: currentPosition, gameViewContoller: self,
+                                           gameBoard: gameBoard,
+                                           gameBoardView: gameboardView, markViewPrototype: move.player.markViewPrototype)
         }
     }
 }

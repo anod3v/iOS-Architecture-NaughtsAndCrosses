@@ -11,7 +11,6 @@ import Foundation
 class LogInvoker {
     public static let shared = LogInvoker()
     
-    private let receiver = LogReceiver()
     private let bufferSize = 10
     private var commands: [LogCommand] = []
     private var commandsSorted: [LogCommand] = []
@@ -40,6 +39,6 @@ class LogInvoker {
 //            commands.forEach { receiver.sendMessage(message: $0.moveData) }
 //            commands = []
         }
-        receiver.commandsSorted?(commandsSorted)
+        LogReceiver.shared.commandsSorted?(commandsSorted)
 }
 }

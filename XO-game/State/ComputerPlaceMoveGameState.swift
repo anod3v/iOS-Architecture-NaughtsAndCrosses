@@ -32,15 +32,15 @@ class ComputerPlaceMoveGameState: GameState {
     }
     
     func addSign(at position: GameboardPosition) {
-        guard let gameBoardView = gameBoardView, gameBoardView.canPlaceMarkView(at: position) else { return }
+//        guard let gameBoardView = gameBoardView, gameBoardView.canPlaceMarkView(at: position) else { return }
         
         let markView: MarkView
         
-        Logger.shared.log(action: .playerSetSign(player: player, position: position))
+//        Logger.shared.log(action: .playerSetSign(player: player, position: position))
         gameBoard?.setPlayer(player, at: position)
         
         
-        gameBoardView.placeMarkView(markViewPrototype.copy(), at: position)
+        gameBoardView?.placeMarkView(markViewPrototype.copy(), at: position)
         isMoveCompleted = true
     }
     
