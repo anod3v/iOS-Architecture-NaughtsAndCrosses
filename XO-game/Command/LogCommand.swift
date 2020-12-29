@@ -19,14 +19,6 @@ class LogCommand {
         switch action {
         case .playerSetSign(let player, let position):
             return MoveData(player: player, position: position)
-//        case .gameFinished(let winner):
-//            if let winner = winner {
-//                return "\(winner) won game"
-//            } else {
-//                return "Is Draw"
-//            }
-//        case .restartGame:
-//            return "Game was restarted"
         }
     }
 }

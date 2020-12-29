@@ -23,6 +23,11 @@ class LogInvoker {
         execute()
     }
     
+    func cleanBuffer() {
+        commands = [LogCommand]()
+        commandsSorted = [LogCommand]()
+    }
+    
     private func execute() {
         guard commands.count >= bufferSize else {
             return

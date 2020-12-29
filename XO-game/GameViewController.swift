@@ -174,7 +174,14 @@ private func nextPlayerTurn() {
     
     gameboardView.clear()
     gameBoard.clear()
+    LogInvoker.shared.cleanBuffer()
     counter = 0
+    switch gameMode {
+    case .selfPlacingMode:
+        gameMode = .playerVsPlayerBlind
+    default:
+        return
+    }
     
     firstPlayerTurn()
 }
