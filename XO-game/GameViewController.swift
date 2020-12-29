@@ -162,6 +162,9 @@ private func nextPlayerTurn() {
         currentState = ComputerPlaceMoveGameState(player: move.player, position: currentPosition, gameViewContoller: self,
                                            gameBoard: gameBoard,
                                            gameBoardView: gameboardView, markViewPrototype: move.player.markViewPrototype)
+        } else {
+            guard checkIfWin() == false else { return }
+            guard checkIfEnd() == false else { return }
         }
     }
 }
