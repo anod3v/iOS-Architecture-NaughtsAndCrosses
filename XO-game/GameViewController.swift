@@ -49,6 +49,8 @@ override func viewDidLoad() {
         guard let self = self else { return }
         self.commands = result
         self.gameMode = .selfPlacingMode
+        self.gameBoard.clear()
+        self.gameboardView.clear()
         self.firstPlayerTurn()
     }
     

@@ -32,7 +32,9 @@ class ComputerPlaceMoveGameState: GameState {
     }
     
     func addSign(at position: GameboardPosition) {
-//        guard let gameBoardView = gameBoardView, gameBoardView.canPlaceMarkView(at: position) else { return }
+        if let gameBoardView = gameBoardView, !gameBoardView.canPlaceMarkView(at: position) {
+            gameBoardView.removeMarkView(at: position)
+        }
         
         let markView: MarkView
         
