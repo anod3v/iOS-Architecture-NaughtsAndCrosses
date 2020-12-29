@@ -55,21 +55,24 @@ class WelcomeViewController: UIViewController {
     }
     
     @objc func pvpClassicButtonAction(sender: UIButton!) {
-        let gameViewController = GameViewController()
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let gameViewController = storyBoard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
         gameViewController.modalPresentationStyle = .fullScreen
         gameViewController.gameMode = .playerVsPlayer
         self.show(gameViewController, sender: nil)
     }
     
     @objc func pvcButtonAction(sender: UIButton!) {
-        let gameViewController = GameViewController()
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let gameViewController = storyBoard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
         gameViewController.modalPresentationStyle = .fullScreen
         gameViewController.gameMode = .playerVsComputer
         self.show(gameViewController, sender: nil)
     }
     
     @objc func pvpBlindButtonAction(sender: UIButton!) {
-        let gameViewController = GameViewController()
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let gameViewController = storyBoard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
         gameViewController.modalPresentationStyle = .fullScreen
         gameViewController.gameMode = .playerVsPlayerBlind
         self.show(gameViewController, sender: nil)
