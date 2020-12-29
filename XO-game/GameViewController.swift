@@ -179,11 +179,10 @@ private func nextPlayerTurn() {
     switch gameMode {
     case .selfPlacingMode:
         gameMode = .playerVsPlayerBlind
+        firstPlayerTurn()
     default:
-        return
+        firstPlayerTurn()
     }
-    
-    firstPlayerTurn()
 }
 
 }

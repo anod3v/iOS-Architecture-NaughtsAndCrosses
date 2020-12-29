@@ -133,6 +133,7 @@
 				BA43EEF52595033C000923EC /* State */,
 				F874E4702224621100364CAE /* AppDelegate.swift */,
 				F874E4722224621100364CAE /* GameViewController.swift */,
+				5515A25A259B2B850054E445 /* WelcomeViewController.swift */,
 				F874E4F02225DFF700364CAE /* Referee.swift */,
 				F874E4E62225CB3F00364CAE /* Models */,
 				F874E4E52225CB3100364CAE /* Views */,
@@ -159,7 +160,6 @@
 			children = (
 				F874E4E02225CAAF00364CAE /* MarkViews */,
 				F874E4DA2225C1AC00364CAE /* GameboardView.swift */,
-				5515A25A259B2B850054E445 /* WelcomeViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
