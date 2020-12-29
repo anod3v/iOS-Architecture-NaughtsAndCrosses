@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5515A25B259B2B850054E445 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5515A25A259B2B850054E445 /* WelcomeViewController.swift */; };
 		5523C6BA259A2053003B084B /* ComputerPlaceMoveGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5523C6B9259A2053003B084B /* ComputerPlaceMoveGameState.swift */; };
 		55A495E02598D0F7004E7250 /* ComputerPlayerGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A495DF2598D0F7004E7250 /* ComputerPlayerGameState.swift */; };
 		BA43EEF725950372000923EC /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EEF625950372000923EC /* GameState.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5515A25A259B2B850054E445 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5523C6B9259A2053003B084B /* ComputerPlaceMoveGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerPlaceMoveGameState.swift; sourceTree = "<group>"; };
 		55A495DF2598D0F7004E7250 /* ComputerPlayerGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerPlayerGameState.swift; sourceTree = "<group>"; };
 		BA43EEF625950372000923EC /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			children = (
 				F874E4E02225CAAF00364CAE /* MarkViews */,
 				F874E4DA2225C1AC00364CAE /* GameboardView.swift */,
+				5515A25A259B2B850054E445 /* WelcomeViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				F874E4DF2225C76000364CAE /* MarkView.swift in Sources */,
 				F874E4F12225DFF700364CAE /* Referee.swift in Sources */,
 				55A495E02598D0F7004E7250 /* ComputerPlayerGameState.swift in Sources */,
+				5515A25B259B2B850054E445 /* WelcomeViewController.swift in Sources */,
 				F874E4F52225E2CD00364CAE /* Gameboard.swift in Sources */,
 				BA43EEFE25950821000923EC /* GameEndState.swift in Sources */,
 				F874E4712224621100364CAE /* AppDelegate.swift in Sources */,
