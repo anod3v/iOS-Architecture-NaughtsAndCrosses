@@ -9,7 +9,7 @@
 import UIKit
 
 class GameViewController: UIViewController {
-
+    
     @IBOutlet var gameboardView: GameboardView!
     @IBOutlet var firstPlayerTurnLabel: UILabel!
     @IBOutlet var secondPlayerTurnLabel: UILabel!
@@ -20,49 +20,115 @@ class GameViewController: UIViewController {
     private let gameBoard = Gameboard()
     private lazy var referee = Referee(gameboard: gameBoard)
     
-    private var currentState: GameState! {
-        didSet {
-            currentState.begin()
-        }
+    var gameMode = GameMode.playerVsPlayerBlind
+    var currentPlayer: Player = .first
+    var receiver = LogReceiver()
+    var commands = [LogCommand]()
+
+
+private var currentState: GameState! {
+    didSet {
+        currentState.begin()
+    }
+}
+
+enum GameMode {
+    case playerVsPlayer
+    case playerVsComputer
+    case playerVsPlayerBlind
+    case selfPlacingMode
+}
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    //первый делает ход
+    firstPlayerTurn()
+    
+    LogReceiver.shared.commandsSorted = { [weak self] result in
+        guard let self = self else { return }
+        self.commands = result
+        self.gameMode = .selfPlacingMode
+        self.gameBoard.clear()
+        self.gameboardView.clear()
+        self.firstPlayerTurn()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    gameboardView.onSelectPosition = { [weak self] position in
+        guard let self = self else { return }
         
-        //первый делает ход
-        firstPlayerTurn()
+        self.currentState.addSign(at: position)
+        self.counter += 1
         
-        gameboardView.onSelectPosition = { [weak self] position in
-            guard let self = self else { return }
-            
-            self.currentState.addSign(at: position)
-            self.counter += 1
-            
-            if self.currentState.isMoveCompleted {
-                self.nextPlayerTurn()
-            }
+        if self.currentState.isMoveCompleted {
+            self.nextPlayerTurn()
         }
     }
+}
     
-    private func firstPlayerTurn() {
-        let firstPlayer: Player = .first
-        currentState = PlayerGameState(player: firstPlayer, gameViewContoller: self,
+//    private func placeAllMoves(commands: [LogCommand]) {
+//
+//    }
+
+private func firstPlayerTurn() {
+    switch gameMode {
+    case .selfPlacingMode:
+        if let move = commands.first?.moveData {
+        let currentPosition = move.position
+        commands.removeFirst()
+            currentState = ComputerPlaceMoveGameState(player: move.player, position: currentPosition, gameViewContoller: self,
+                                           gameBoard: gameBoard,
+                                           gameBoardView: gameboardView, markViewPrototype: move.player.markViewPrototype)
+        }
+        
+    default:
+        currentPlayer = .first
+        currentState = PlayerGameState(player: currentPlayer, gameViewContoller: self,
                                        gameBoard: gameBoard,
-                                       gameBoardView: gameboardView, markViewPrototype: firstPlayer.markViewPrototype)
+                                       gameBoardView: gameboardView, markViewPrototype: currentPlayer.markViewPrototype)
     }
+}
+
+private func checkIfWin() -> Bool {
+    if let winner = referee.determineWinner() {
+        currentState = GameEndState(winnerPlayer: winner, gameViewController: self)
+//        Logger.shared.log(action: .gameFinished(winned: winner))
+        return true
+    }
+    return false
+}
+
+private func checkIfEnd() -> Bool {
+    if counter >= GameboardSize.columns  * GameboardSize.rows {
+//        Logger.shared.log(action: .gameFinished(winned: nil))
+        currentState = GameEndState(winnerPlayer: nil, gameViewController: self)
+        return true
+    }
+    return false
+}
+
+private func nextPlayerTurn() {
     
-    private func nextPlayerTurn() {
-        if let winner = referee.determineWinner() {
-            currentState = GameEndState(winnerPlayer: winner, gameViewController: self)
-            Logger.shared.log(action: .gameFinished(winned: winner))
-            return
+    switch gameMode {
+    case .playerVsComputer:
+        guard checkIfWin() == false else { return }
+        guard checkIfEnd() == false else { return }
+        currentPlayer = currentPlayer.next
+        switch currentPlayer {
+        case .first:
+            currentState = PlayerGameState(player: currentPlayer,
+                                           gameViewContoller: self,
+                                           gameBoard: gameBoard, gameBoardView: gameboardView,
+                                           markViewPrototype: currentPlayer.markViewPrototype)
+        case .second:
+            currentState = ComputerPlayerGameState(player: currentPlayer,
+                                                   gameViewContoller: self,
+                                                   gameBoard: gameBoard, gameBoardView: gameboardView,
+                                                   markViewPrototype: currentPlayer.markViewPrototype)
         }
-        
-        if counter >= 9 {
-            Logger.shared.log(action: .gameFinished(winned: nil))
-            currentState = GameEndState(winnerPlayer: nil, gameViewController: self)
-        }
-        
+    case .playerVsPlayer:
+        guard checkIfWin() == false else { return }
+        guard checkIfEnd() == false else { return }
         if let playerState = currentState as? PlayerGameState {
             let nextPlayer = playerState.player.next
             currentState = PlayerGameState(player: nextPlayer,
@@ -70,17 +136,54 @@ class GameViewController: UIViewController {
                                            gameBoard: gameBoard, gameBoardView: gameboardView,
                                            markViewPrototype: nextPlayer.markViewPrototype)
         }
+    case .playerVsPlayerBlind:
+        switch counter {
+        case 5:
+            gameboardView.clear()
+            currentPlayer = currentPlayer.next
+        case 10:
+            guard checkIfWin() == false else { return }
+            guard checkIfEnd() == false else { return }
+        default:
+            return
+        }
+        if let playerState = currentState as? PlayerGameState {
+            let nextPlayer = playerState.player.next
+            currentState = PlayerGameState(player: nextPlayer,
+                                           gameViewContoller: self,
+                                           gameBoard: gameBoard, gameBoardView: gameboardView,
+                                           markViewPrototype: nextPlayer.markViewPrototype)
+        }
+        
+    case .selfPlacingMode:
+        if let move = commands.first?.moveData {
+        commands.removeFirst()
+        let currentPosition = move.position
+        currentState = ComputerPlaceMoveGameState(player: move.player, position: currentPosition, gameViewContoller: self,
+                                           gameBoard: gameBoard,
+                                           gameBoardView: gameboardView, markViewPrototype: move.player.markViewPrototype)
+        } else {
+            guard checkIfWin() == false else { return }
+            guard checkIfEnd() == false else { return }
+        }
     }
+}
+
+@IBAction func restartButtonTapped(_ sender: UIButton) {
+//    Logger.shared.log(action: .restartGame)
     
-    @IBAction func restartButtonTapped(_ sender: UIButton) {
-        Logger.shared.log(action: .restartGame)
-        
-        gameboardView.clear()
-        gameBoard.clear()
-        counter = 0
-        
+    gameboardView.clear()
+    gameBoard.clear()
+    LogInvoker.shared.cleanBuffer()
+    counter = 0
+    switch gameMode {
+    case .selfPlacingMode:
+        gameMode = .playerVsPlayerBlind
+        firstPlayerTurn()
+    default:
         firstPlayerTurn()
     }
-    
+}
+
 }
 

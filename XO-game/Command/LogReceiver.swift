@@ -9,7 +9,7 @@
 import Foundation
 
 class LogReceiver {
-    func sendMessage(message: String) {
-        print(message)
-    }
+    public static let shared = LogReceiver()
+    var commandsSorted: (([LogCommand]) -> Void)?
+    init() {}
 }
